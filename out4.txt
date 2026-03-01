@@ -1,0 +1,6 @@
+Analyzing login_mahasiswa...                                    
+
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\register\register_page.dart:194:25 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\register\register_page.dart:195:25 - deprecated_member_use
+
+2 issues found. (ran in 3.0s)
