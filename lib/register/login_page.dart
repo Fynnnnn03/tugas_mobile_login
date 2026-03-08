@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'register_page.dart';
-import 'profile_page.dart';
 import '../models/mahasiswa.dart';
+import '../home_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => ProfilePage(mahasiswa: mahasiswaDitemukan!),
+          builder: (context) => HomeScreen(mahasiswa: mahasiswaDitemukan!),
         ),
       );
     }

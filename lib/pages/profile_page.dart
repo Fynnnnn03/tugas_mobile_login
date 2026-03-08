@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/mahasiswa.dart';
-import 'login_page.dart';
+import '../register/login_page.dart';
 
 class ProfilePage extends StatelessWidget {
   final Mahasiswa mahasiswa;

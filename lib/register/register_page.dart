@@ -60,8 +60,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _daftar() {
     if (_formKey.currentState!.validate()) {
-      bool usernameExists = RegisterPage.daftarMahasiswa
-          .any((m) => m.username == _usernameController.text.trim());
+      bool usernameExists = RegisterPage.daftarMahasiswa.any(
+        (m) => m.username == _usernameController.text.trim(),
+      );
       if (usernameExists) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Username sudah digunakan!')),
@@ -69,12 +70,13 @@ class _RegisterPageState extends State<RegisterPage> {
         return;
       }
 
-      bool emailExists = RegisterPage.daftarMahasiswa
-          .any((m) => m.email == _emailController.text.trim());
+      bool emailExists = RegisterPage.daftarMahasiswa.any(
+        (m) => m.email == _emailController.text.trim(),
+      );
       if (emailExists) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Email sudah terdaftar!')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Email sudah terdaftar!')));
         return;
       }
 
@@ -94,7 +96,6 @@ class _RegisterPageState extends State<RegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Registrasi berhasil! Silakan login.')),
       );
-
       Future.delayed(const Duration(seconds: 1), () {
         if (!mounted) return;
         Navigator.pushReplacement(
@@ -108,9 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Registrasi'),
-      ),
+      appBar: AppBar(title: const Text('Registrasi')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -125,7 +124,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) return 'Tidak boleh kosong';
+                  if (value == null || value.isEmpty) {
+                    return 'Tidak boleh kosong';
+                  }
                   return null;
                 },
               ),
@@ -137,8 +138,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) return 'Tidak boleh kosong';
-                  if (value.contains(' ')) return 'Tidak boleh mengandung spasi';
+                  if (value == null || value.isEmpty) {
+                    return 'Tidak boleh kosong';
+                  }
+                  if (value.contains(' ')) {
+                    return 'Tidak boleh mengandung spasi';
+                  }
                   return null;
                 },
               ),
@@ -151,7 +156,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) return 'Tidak boleh kosong';
+                  if (value == null || value.isEmpty) {
+                    return 'Tidak boleh kosong';
+                  }
                   return null;
                 },
               ),
@@ -165,7 +172,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) return 'Tidak boleh kosong';
+                  if (value == null || value.isEmpty) {
+                    return 'Tidak boleh kosong';
+                  }
                   return null;
                 },
               ),
@@ -178,31 +187,30 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) return 'Tidak boleh kosong';
+                  if (value == null || value.isEmpty) {
+                    return 'Tidak boleh kosong';
+                  }
                   return null;
                 },
               ),
               const SizedBox(height: 12),
-              const Text('Jenis Kelamin:'),
-              Wrap(
-                children: _genderOptions.map((gender) {
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Radio<String>(
-                        value: gender,
-                        groupValue: _selectedGender,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedGender = value!;
-                          });
-                        },
-                      ),
-                      Text(gender),
-                      const SizedBox(width: 8),
-                    ],
+              DropdownButtonFormField<String>(
+                initialValue: _selectedGender,
+                decoration: const InputDecoration(
+                  labelText: 'Jenis Kelamin',
+                  border: OutlineInputBorder(),
+                ),
+                items: _genderOptions.map((gender) {
+                  return DropdownMenuItem<String>(
+                    value: gender,
+                    child: Text(gender),
                   );
                 }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedGender = value!;
+                  });
+                },
               ),
               const SizedBox(height: 12),
               TextFormField(
@@ -213,7 +221,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) return 'Tidak boleh kosong';
+                  if (value == null || value.isEmpty) {
+                    return 'Tidak boleh kosong';
+                  }
                   return null;
                 },
               ),
@@ -226,7 +236,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                      _obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
                     ),
                     onPressed: () {
                       setState(() {
@@ -236,16 +248,17 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) return 'Tidak boleh kosong';
-                  if (value.length < 6) return 'Minimal 6 karakter';
+                  if (value == null || value.isEmpty) {
+                    return 'Tidak boleh kosong';
+                  }
+                  if (value.length < 6) {
+                    return 'Minimal 6 karakter';
+                  }
                   return null;
                 },
               ),
               const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: _daftar,
-                child: const Text('DAFTAR'),
-              ),
+              ElevatedButton(onPressed: _daftar, child: const Text('DAFTAR')),
               const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
