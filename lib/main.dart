@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'register/login_page.dart';
+import 'home_screen.dart';
+import 'models/mahasiswa.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +19,18 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: HomeScreen(
+        mahasiswa: Mahasiswa(
+          fullName: 'Indra Nur',
+          username: 'indra',
+          email: 'indra@gmail.com',
+          birthDate: '01/01/2000',
+          phone: '08123456789',
+          gender: 'Laki-laki',
+          address: 'Jl. jember',
+          password: '12345678',
+        ),
+      ),
     );
   }
 }
